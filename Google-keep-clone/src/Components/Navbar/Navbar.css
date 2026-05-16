@@ -1,0 +1,71 @@
+.navbar {
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  min-height: 100vh;
+  padding: 8px 0;
+  background-color: #fff;
+  border-right: 1px solid #dadce0;
+}
+
+.navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px 20px;
+}
+
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #fbbc04;
+  color: #202124;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.navbar__title {
+  font-size: 1.375rem;
+  font-weight: 500;
+  color: #5f6368;
+  letter-spacing: 0.01em;
+}
+
+.navbar__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar__item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  padding: 10px 24px;
+  border: none;
+  background: transparent;
+  border-radius: 0 24px 24px 0;
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.875rem;
+  color: #202124;
+}
+
+.navbar__item:hover {
+  background-color: #f1f3f4;
+}
+
+.navbar__icon {
+  width: 24px;
+  height: 24px;
+  opacity: 0.72;
+}
+
+.navbar__label {
+  font-weight: 500;
+}
