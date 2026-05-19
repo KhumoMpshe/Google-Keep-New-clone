@@ -1,20 +1,48 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap");
 
-body {
+* {
   margin: 0;
-  font-family: 'Google Sans', Roboto, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #202124;
-  background-color: #fff;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
 }
 
-button,
-input,
-textarea {
-  font-family: inherit;
+/* HOVER EFFECTS */
+.material-symbols-outlined {
+  padding: 10px;
+}
+
+.hover:hover {
+  background: #f1f3f4;
+  color: black;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.tooltip {
+  position: relative;
+  display: inline;
+}
+
+.tooltip-text {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  font-size: 0.78rem;
+  background-color: #323232;
+  color: white;
+  opacity: 0.8;
+  padding: 5px;
+  white-space: nowrap;
+  border-radius: 5px;
+  visibility: hidden;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+}
+
+input:focus {
+  outline: none;
 }

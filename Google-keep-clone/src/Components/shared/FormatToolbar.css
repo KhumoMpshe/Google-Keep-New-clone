@@ -1,0 +1,86 @@
+.format-toolbar {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 8px;
+  background: #fff;
+  border: 1px solid #dadce0;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px 0 rgba(60, 64, 67, 0.2),
+    0 2px 6px 2px rgba(60, 64, 67, 0.1);
+  z-index: 100;
+  white-space: nowrap;
+}
+
+.format-toolbar__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 6px;
+  border: none;
+  background: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #3c4043;
+  font-size: 0.875rem;
+  line-height: 1;
+}
+
+.format-toolbar__btn:hover {
+  background: #f1f3f4;
+}
+
+.format-toolbar__btn--active {
+  background: #e8eaed;
+}
+
+.format-toolbar__btn--heading {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 0.8125rem;
+  letter-spacing: 0.01em;
+}
+
+.format-toolbar__btn--heading:nth-child(3) {
+  font-size: 0.75rem;
+}
+
+.format-toolbar__btn--style {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  min-width: 28px;
+}
+
+.format-toolbar__btn--bold {
+  font-weight: 700;
+}
+
+.format-toolbar__btn--italic {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.format-toolbar__btn--underline {
+  text-decoration: underline;
+  font-weight: 400;
+}
+
+.format-toolbar__divider {
+  width: 1px;
+  height: 20px;
+  margin: 0 4px;
+  background: #dadce0;
+  flex-shrink: 0;
+}
+
+.format-toolbar__btn--clear .material-symbols-outlined {
+  font-size: 20px;
+  padding: 0;
+  color: #3c4043;
+}

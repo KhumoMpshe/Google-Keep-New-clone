@@ -1,0 +1,160 @@
+.notes {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 0 50px;
+}
+
+.note {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  margin: 10px;
+  width: 280px;
+  min-height: 133px;
+  border: 1px solid #e0e1e0;
+  border-radius: 8px;
+  position: relative;
+  cursor: pointer;
+}
+
+.note:hover {
+  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302),
+    0 2px 6px 2px rgba(60, 64, 67, 0.149);
+}
+
+.note .title {
+  width: 100%;
+  margin: 15px 36px 0 15px;
+  font-size: 23px;
+  font-weight: 400;
+}
+
+.note .text {
+  width: 100%;
+  margin: 10px 0 0 15px;
+}
+
+.note .note-footer {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 2px 8px;
+  max-width: 100%;
+  gap: 4px;
+  visibility: hidden;
+}
+
+.note:hover .note-footer {
+  visibility: visible;
+}
+
+.note-footer .tooltip {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.note-footer .material-symbols-outlined {
+  color: #5f6368;
+  font-size: 23px;
+  padding: 4px;
+}
+
+.note .check-circle {
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  visibility: hidden;
+  border-radius: 50%;
+  color: rgb(32, 33, 36);
+  padding: 4px;
+}
+
+.note:hover .check-circle {
+  visibility: visible;
+}
+
+.note .pin-note {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  visibility: hidden;
+  z-index: 1;
+}
+
+.note .pin-note .material-symbols-outlined {
+  color: #5f6368;
+  font-size: 23px;
+  padding: 10px;
+}
+
+.note:hover .pin-note {
+  visibility: visible;
+}
+
+.notes--empty {
+  width: 100%;
+  text-align: center;
+  padding: 48px 20px;
+  color: #5f6368;
+  font-size: 1rem;
+}
+
+.note-reminder,
+.note-collaborators {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 15px 0;
+  font-size: 0.75rem;
+  color: #5f6368;
+}
+
+.note-reminder .material-symbols-outlined,
+.note-collaborators .material-symbols-outlined {
+  font-size: 16px;
+  padding: 0;
+}
+
+.note .text {
+  padding-right: 12px;
+  word-break: break-word;
+}
+
+.note-footer-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.note-format-popup {
+  position: absolute;
+  bottom: 48px;
+  right: 8px;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(60, 64, 67, 0.3);
+  z-index: 10;
+  text-align: center;
+}
+
+.note-format-hint {
+  font-size: 0.8rem;
+  color: #5f6368;
+  margin-bottom: 8px;
+}
+
+.note-format-popup button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  background: #1a73e8;
+  color: #fff;
+  font-size: 0.85rem;
+  cursor: pointer;
+}

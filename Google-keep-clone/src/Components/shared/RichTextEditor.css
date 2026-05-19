@@ -1,0 +1,29 @@
+.note-text-editor {
+  border: none;
+  font-size: 1rem;
+  flex: 1;
+  min-height: 0;
+  padding: 4px 10px;
+  margin-left: 10px;
+  width: calc(100% - 20px);
+  outline: none;
+  color: #202124;
+  word-break: break-word;
+  overflow-y: auto;
+}
+
+.note-text-editor:empty::before {
+  content: attr(data-placeholder);
+  color: #5f6368;
+  pointer-events: none;
+}
+
+.note-text-editor ul {
+  margin-left: 20px;
+  list-style: disc;
+}
+
+.note-text-editor h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}

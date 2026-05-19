@@ -1,10 +1,4 @@
-.app {
-  display: flex;
-  min-height: 100vh;
-  background-color: #fff;
-}
-
-.main {
-  flex: 1;
-  background-color: #fff;
+main {
+  position: relative;
+  padding-top: 64px;
 }

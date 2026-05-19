@@ -1,0 +1,136 @@
+.reminder-picker {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 320px;
+  padding: 20px 24px 16px;
+  background: #fff;
+  border: 1px solid #dadce0;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px 0 rgba(60, 64, 67, 0.2),
+    0 4px 8px 3px rgba(60, 64, 67, 0.1);
+  z-index: 100;
+}
+
+.reminder-picker__title {
+  margin: 0 0 4px;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #202124;
+}
+
+.reminder-picker__subtitle {
+  margin: 0 0 12px;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: #5f6368;
+}
+
+.reminder-picker__presets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.reminder-picker__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.875rem;
+  color: #202124;
+  border-radius: 4px;
+}
+
+.reminder-picker__option:hover {
+  background: #f1f3f4;
+}
+
+.reminder-picker__option-label {
+  font-weight: 400;
+}
+
+.reminder-picker__option-time {
+  color: #5f6368;
+  font-size: 0.875rem;
+}
+
+.reminder-picker__custom-trigger {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin-top: 4px;
+  padding: 10px 0 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: #202124;
+  text-align: left;
+  border-radius: 4px;
+}
+
+.reminder-picker__custom-trigger:hover {
+  background: #f1f3f4;
+}
+
+.reminder-picker__custom-trigger .material-symbols-outlined {
+  font-size: 20px;
+  padding: 0;
+  color: #5f6368;
+}
+
+.reminder-picker__custom-panel {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e8eaed;
+}
+
+.reminder-picker__field {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 0.8125rem;
+  color: #5f6368;
+}
+
+.reminder-picker__field span {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.reminder-picker__field input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #dadce0;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  color: #202124;
+}
+
+.reminder-picker__custom-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.reminder-picker__custom-actions button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background: #1a73e8;
+  color: #fff;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.reminder-picker__clear {
+  background: #f1f3f4 !important;
+  color: #202124 !important;
+}
