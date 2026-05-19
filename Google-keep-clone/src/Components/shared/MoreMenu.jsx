@@ -7,20 +7,21 @@ const menuItems = [
   { id: 'history', label: 'Version history' },
 ]
 
-export default function MoreMenu({ onClose }) {
-  const handleSelect = () => {
+export default function MoreMenu({ items = menuItems, onClose, onSelect }) {
+  const handleSelect = (itemId) => {
+    onSelect?.(itemId)
     onClose?.()
   }
 
   return (
     <div className="more-menu" onClick={(e) => e.stopPropagation()}>
       <ul className="more-menu__list">
-        {menuItems.map((item) => (
+        {items.map((item) => (
           <li key={item.id}>
             <button
               type="button"
               className="more-menu__item"
-              onClick={handleSelect}
+              onClick={() => handleSelect(item.id)}
             >
               {item.label}
             </button>

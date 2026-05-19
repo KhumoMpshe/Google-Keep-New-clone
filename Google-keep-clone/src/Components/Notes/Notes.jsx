@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import ColorPicker from '../shared/ColorPicker.jsx'
 import ReminderPicker from '../shared/ReminderPicker.jsx'
 import CollaboratorModal from '../shared/CollaboratorModal.jsx'
+import MoreMenu from '../shared/MoreMenu.jsx'
 import { formatReminderLabel } from '../../utils/noteHelpers.js'
 import './Notes.css'
 
@@ -15,7 +16,7 @@ const footerIcons = [
   { id: 'more', icon: 'more_vert', label: 'More' },
 ]
 
-function NoteCard({ note, onNoteClick, onArchiveNote, onUpdateNote }) {
+function NoteCard({ note, onNoteClick, onArchiveNote, onUpdateNote, onDeleteNote }) {
   const [openPopup, setOpenPopup] = useState(null)
   const [showCollabModal, setShowCollabModal] = useState(false)
   const textPreviewRef = useRef(null)
@@ -42,7 +43,7 @@ function NoteCard({ note, onNoteClick, onArchiveNote, onUpdateNote }) {
       setShowCollabModal(true)
       return
     }
-    if (item.id === 'format' || item.id === 'color' || item.id === 'reminder') {
+    if (item.id === 'format' || item.id === 'color' || item.id === 'reminder' || item.id === 'more') {
       setOpenPopup((prev) => (prev === item.id ? null : item.id))
     }
   }
@@ -53,6 +54,20 @@ function NoteCard({ note, onNoteClick, onArchiveNote, onUpdateNote }) {
       note.backgroundColor && note.backgroundColor !== '#ffffff'
         ? note.backgroundColor
         : '#e0e1e0',
+  }
+
+  const moreMenuItems = [
+    { id: 'delete', label: 'Delete note' },
+    { id: 'label', label: 'Add label' },
+    { id: 'drawing', label: 'Add drawing' },
+    { id: 'tickboxes', label: 'Show tick boxes' },
+    { id: 'history', label: 'Version history' },
+  ]
+
+  const handleMoreMenuSelect = (itemId) => {
+    if (itemId === 'delete') {
+      onDeleteNote?.(note.id)
+    }
   }
 
   return (
@@ -127,6 +142,13 @@ function NoteCard({ note, onNoteClick, onArchiveNote, onUpdateNote }) {
                   onClose={() => setOpenPopup(null)}
                 />
               )}
+              {openPopup === 'more' && item.id === 'more' && (
+                <MoreMenu
+                  items={moreMenuItems}
+                  onSelect={handleMoreMenuSelect}
+                  onClose={() => setOpenPopup(null)}
+                />
+              )}
             </div>
           ))}
         </div>
@@ -164,14 +186,18 @@ function NoteCard({ note, onNoteClick, onArchiveNote, onUpdateNote }) {
   )
 }
 
-export default function Notes({ notes, view, onNoteClick, onArchiveNote, onUpdateNote }) {
+export default function Notes({ notes, view, onNoteClick, onArchiveNote, onUpdateNote, onDeleteNote }) {
   if (notes.length === 0) {
     return (
       <div className="notes notes--empty">
         <p>
+          <span className="material-symbols-outlined" style={{ fontSize: '100px', opacity: 0.6 }}>
+            lightbulb_2
+          </span>
+          <br />
           {view === 'archive'
             ? 'No archived notes'
-            : 'No notes yet. Click "Take a note..." to create one.'}
+            : 'Notes that you add apear here'}
         </p>
       </div>
     )
@@ -186,6 +212,7 @@ export default function Notes({ notes, view, onNoteClick, onArchiveNote, onUpdat
           onNoteClick={onNoteClick}
           onArchiveNote={onArchiveNote}
           onUpdateNote={onUpdateNote}
+          onDeleteNote={onDeleteNote}
         />
       ))}
     </div>

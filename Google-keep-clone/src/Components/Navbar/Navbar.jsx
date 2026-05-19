@@ -10,8 +10,8 @@ export default function Navbar() {
         </div>
         <img
           className="gb_Hc gb_Hd"
-          src="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png"
-          srcSet="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png 1x, https://www.gstatic.com/images/branding/product/2x/keep_2020q4_48dp.png 2x"
+          src="https://www.gstatic.com/images/branding/productlogos/keep_2026/v2/web-48dp/logo_keep_2026_color_2x_web_48dp.png"
+          srcset="https://www.gstatic.com/images/branding/productlogos/keep_2026/v2/web-48dp/logo_keep_2026_color_1x_web_48dp.png 1x, https://www.gstatic.com/images/branding/productlogos/keep_2026/v2/web-48dp/logo_keep_2026_color_2x_web_48dp.png 2x"
           alt=""
           aria-hidden="true"
           role="presentation"

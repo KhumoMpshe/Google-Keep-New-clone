@@ -20,11 +20,21 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingNote, setEditingNote] = useState(null)
   const [archiveToast, setArchiveToast] = useState(null)
+  const [theme, setTheme] = useState(() => {
+    const storedTheme = localStorage.getItem('theme')
+    if (storedTheme === 'light' || storedTheme === 'dark') return storedTheme
+    return window.matchMedia?.('(prefers-color-scheme: dark)')?.matches ? 'dark' : 'light'
+  })
   const archiveTimerRef = useRef(null)
 
   useEffect(() => {
     localStorage.setItem('notes', JSON.stringify(notes))
   }, [notes])
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    localStorage.setItem('theme', theme)
+  }, [theme])
 
   const showArchiveToast = (archivedNote) => {
     if (archiveTimerRef.current) clearTimeout(archiveTimerRef.current)
@@ -62,6 +72,14 @@ function App() {
     )
   }
 
+  const deleteNote = (id) => {
+    setNotes((prev) => prev.filter((note) => note.id !== id))
+    if (editingNote?.id === id) {
+      setIsModalOpen(false)
+      setEditingNote(null)
+    }
+  }
+
   const archiveNote = (id) => {
     const note = notes.find((n) => n.id === id)
     if (!note || note.archived) return
@@ -86,6 +104,10 @@ function App() {
     )
     setArchiveToast(null)
     if (archiveTimerRef.current) clearTimeout(archiveTimerRef.current)
+  }
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'))
   }
 
   const saveEditingNote = () => {
@@ -138,6 +160,7 @@ function App() {
           onNoteClick={openModal}
           onArchiveNote={archiveNote}
           onUpdateNote={updateNote}
+          onDeleteNote={deleteNote}
         />
         <Modal
           isOpen={isModalOpen}
@@ -151,6 +174,16 @@ function App() {
         visible={!!archiveToast}
         onUndo={undoArchive}
       />
+      <button
+        type="button"
+        className="theme-toggle-btn"
+        onClick={toggleTheme}
+        aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+      >
+        <span className="material-symbols-outlined">
+          {theme === 'light' ? 'dark_mode' : 'light_mode'}
+        </span>
+      </button>
     </>
   )
 }

@@ -56,6 +56,10 @@
   flex-shrink: 0;
 }
 
+.note-footer .icon-popup-anchor {
+  position: relative;
+}
+
 .note-footer .material-symbols-outlined {
   color: #5f6368;
   font-size: 23px;
@@ -99,7 +103,8 @@
   text-align: center;
   padding: 48px 20px;
   color: #5f6368;
-  font-size: 1rem;
+  opacity: 0.6;
+  font-size: 30px;
 }
 
 .note-reminder,
