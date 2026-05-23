@@ -19,3 +19,9 @@
 .open-modal {
   visibility: visible;
 }
+
+/* Modal form should expand to show both title and text editor */
+.modal .form {
+  height: auto !important;
+  min-height: 200px;
+}

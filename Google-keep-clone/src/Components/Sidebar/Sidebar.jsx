@@ -9,9 +9,7 @@ const sidebarItems = [
   { id: 'trash', icon: 'delete', label: 'Trash', view: 'notes' },
 ]
 
-export default function Sidebar({ activeView = 'notes', onViewChange }) {
-  const [isExpanded, setIsExpanded] = useState(false)
-
+export default function Sidebar({ activeView = 'notes', onViewChange, isExpanded = false, onToggleExpand }) {
   const handleItemClick = (item) => {
     if (item.view && onViewChange) {
       onViewChange(item.view)
@@ -21,9 +19,9 @@ export default function Sidebar({ activeView = 'notes', onViewChange }) {
   return (
     <div
       className={`sidebar ${isExpanded ? 'sidebar-hover' : ''}`}
-      style={{ width: isExpanded ? '250px' : '80px' }}
-      onMouseEnter={() => setIsExpanded(true)}
-      onMouseLeave={() => setIsExpanded(false)}
+      style={{ width: isExpanded ? '250px' : '80px', transition: 'width 0.3s ease' }}
+      onMouseEnter={() => onToggleExpand?.(true)}
+      onMouseLeave={() => onToggleExpand?.(false)}
     >
       {sidebarItems.map((item) => {
         const isActive =

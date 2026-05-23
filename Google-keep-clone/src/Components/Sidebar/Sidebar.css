@@ -8,7 +8,7 @@
   color: #5f6368;
   width: 80px;
   overflow-x: hidden;
-  transition: 0.8s;
+  transition: width 0.3s ease;
   height: 100%;
   background: white;
   z-index: 1100;

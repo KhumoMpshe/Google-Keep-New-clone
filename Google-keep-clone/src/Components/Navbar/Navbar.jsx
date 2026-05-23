@@ -1,11 +1,27 @@
 import './Navbar.css'
 
-export default function Navbar() {
+export default function Navbar({ onToggleSidebar, searchTerm = '', onSearchChange }) {
   return (
     <nav>
       <div className="logo-area">
         <div className="tooltip">
-          <span className="material-symbols-outlined hover">menu</span>
+          <button
+            type="button"
+            className="menu-btn"
+            onClick={() => onToggleSidebar?.()}
+            aria-label="Toggle sidebar"
+            style={{
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              padding: '0',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <span className="material-symbols-outlined hover">menu</span>
+          </button>
           <span className="tooltip-text">Main Menu</span>
         </div>
         <img
@@ -25,7 +41,12 @@ export default function Navbar() {
           <span className="material-symbols-outlined hover">search</span>
           <span className="tooltip-text">Search</span>
         </div>
-        <input type="text" placeholder="Search" />
+        <input 
+          type="text" 
+          placeholder="Search" 
+          value={searchTerm}
+          onChange={(e) => onSearchChange?.(e.target.value)}
+        />
       </div>
 
       <div className="navbar-actions">

@@ -5,6 +5,7 @@ import ReminderPicker from '../shared/ReminderPicker.jsx'
 import MoreMenu from '../shared/MoreMenu.jsx'
 import CollaboratorModal from '../shared/CollaboratorModal.jsx'
 import RichTextEditor from '../shared/RichTextEditor.jsx'
+import { adjustHex } from '../shared/ColorPicker.jsx'
 import { getPlainText } from '../../utils/noteHelpers.js'
 import './Form.css'
 
@@ -242,10 +243,26 @@ export default function Form({ onAddNote }) {
   const [draft, setDraft] = useState(emptyDraft)
   const [past, setPast] = useState([])
   const [future, setFuture] = useState([])
+  const [theme, setTheme] = useState('light')
 
   const inactiveFormRef = useRef(null)
   const activeFormRef = useRef(null)
   const textEditorRef = useRef(null)
+
+  // Listen to theme changes
+  useEffect(() => {
+    const initialTheme = document.documentElement.dataset.theme || 'light'
+    setTheme(initialTheme)
+
+    const observer = new MutationObserver(() => {
+      const newTheme = document.documentElement.dataset.theme || 'light'
+      setTheme(newTheme)
+    })
+
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
+
+    return () => observer.disconnect()
+  }, [])
 
   const { title, text, backgroundColor, reminder, collaborators } = draft
 
@@ -338,9 +355,14 @@ export default function Form({ onAddNote }) {
     saveAndClose()
   }
 
+  // Apply dark mode adjustment to form colors
+  const darkFactor = -0.18
+  const displayColor = theme === 'dark' && backgroundColor !== '#ffffff' ? adjustHex(backgroundColor, darkFactor) : backgroundColor
+  const displayBorder = theme === 'dark' && backgroundColor !== '#ffffff' ? adjustHex(backgroundColor, darkFactor) : (backgroundColor !== '#ffffff' ? backgroundColor : undefined)
+
   const formContainerStyle = {
-    backgroundColor,
-    borderColor: backgroundColor !== '#ffffff' ? backgroundColor : undefined,
+    backgroundColor: displayColor,
+    borderColor: displayBorder,
   }
 
   return (

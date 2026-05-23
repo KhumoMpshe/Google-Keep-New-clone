@@ -1,9 +1,10 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import ColorPicker from '../shared/ColorPicker.jsx'
 import ReminderPicker from '../shared/ReminderPicker.jsx'
 import CollaboratorModal from '../shared/CollaboratorModal.jsx'
 import MoreMenu from '../shared/MoreMenu.jsx'
 import { formatReminderLabel } from '../../utils/noteHelpers.js'
+import { adjustHex } from '../shared/ColorPicker.jsx'
 import './Notes.css'
 
 const footerIcons = [
@@ -19,7 +20,23 @@ const footerIcons = [
 function NoteCard({ note, onNoteClick, onArchiveNote, onUpdateNote, onDeleteNote }) {
   const [openPopup, setOpenPopup] = useState(null)
   const [showCollabModal, setShowCollabModal] = useState(false)
+  const [theme, setTheme] = useState('light')
   const textPreviewRef = useRef(null)
+
+  // Listen to theme changes
+  useEffect(() => {
+    const initialTheme = document.documentElement.dataset.theme || 'light'
+    setTheme(initialTheme)
+
+    const observer = new MutationObserver(() => {
+      const newTheme = document.documentElement.dataset.theme || 'light'
+      setTheme(newTheme)
+    })
+
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
+
+    return () => observer.disconnect()
+  }, [])
 
   const handleClick = (event) => {
     if (
@@ -48,12 +65,15 @@ function NoteCard({ note, onNoteClick, onArchiveNote, onUpdateNote, onDeleteNote
     }
   }
 
+  // Apply dark mode adjustment to note colors
+  const darkFactor = -0.18
+  const baseColor = note.backgroundColor || '#ffffff'
+  const displayColor = theme === 'dark' && baseColor !== '#ffffff' ? adjustHex(baseColor, darkFactor) : baseColor
+  const displayBorder = theme === 'dark' && baseColor !== '#ffffff' ? adjustHex(baseColor, darkFactor) : (baseColor !== '#ffffff' ? baseColor : '#e0e1e0')
+
   const noteStyle = {
-    backgroundColor: note.backgroundColor || '#ffffff',
-    borderColor:
-      note.backgroundColor && note.backgroundColor !== '#ffffff'
-        ? note.backgroundColor
-        : '#e0e1e0',
+    backgroundColor: displayColor,
+    borderColor: displayBorder,
   }
 
   const moreMenuItems = [
@@ -111,7 +131,7 @@ function NoteCard({ note, onNoteClick, onArchiveNote, onUpdateNote, onDeleteNote
         />
 
         <div className="note-footer" onClick={(e) => e.stopPropagation()}>
-          {footerIcons.map((item) => (
+          {footerIcons.filter(item => item.id !== 'format').map((item) => (
             <div
               key={item.id}
               className={`tooltip icon-popup-anchor ${item.className || ''}`.trim()}
@@ -186,8 +206,16 @@ function NoteCard({ note, onNoteClick, onArchiveNote, onUpdateNote, onDeleteNote
   )
 }
 
-export default function Notes({ notes, view, onNoteClick, onArchiveNote, onUpdateNote, onDeleteNote }) {
+export default function Notes({ notes, view, onNoteClick, onArchiveNote, onUpdateNote, onDeleteNote, searchTerm = '' }) {
   if (notes.length === 0) {
+    let emptyMessage = 'Notes that you add apear here'
+    
+    if (searchTerm.trim() !== '') {
+      emptyMessage = 'No notes found'
+    } else if (view === 'archive') {
+      emptyMessage = 'No archived notes'
+    }
+    
     return (
       <div className="notes notes--empty">
         <p>
@@ -195,9 +223,7 @@ export default function Notes({ notes, view, onNoteClick, onArchiveNote, onUpdat
             lightbulb_2
           </span>
           <br />
-          {view === 'archive'
-            ? 'No archived notes'
-            : 'Notes that you add apear here'}
+          {emptyMessage}
         </p>
       </div>
     )

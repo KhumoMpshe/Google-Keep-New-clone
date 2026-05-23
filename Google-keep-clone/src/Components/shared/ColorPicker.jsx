@@ -21,6 +21,9 @@ function adjustHex(hex, factor) {
   return `#${((1 << 24) + (nr << 16) + (ng << 8) + nb).toString(16).slice(1)}`
 }
 
+// Export adjustHex so it can be reused in other components
+export { adjustHex }
+
 export default function ColorPicker({ selectedColor, onSelect, onClose }) {
   const [theme, setTheme] = useState('light')
   const darkFactor = -0.18
@@ -58,7 +61,7 @@ export default function ColorPicker({ selectedColor, onSelect, onClose }) {
               style={{ backgroundColor: displayBg, borderColor: color.border }}
               title={color.id}
               onClick={() => {
-                onSelect(displayBg)
+                onSelect(color.bg)
                 onClose?.()
               }}
             />

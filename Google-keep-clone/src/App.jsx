@@ -20,12 +20,18 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingNote, setEditingNote] = useState(null)
   const [archiveToast, setArchiveToast] = useState(null)
+  const [sidebarExpanded, setSidebarExpanded] = useState(false)
+  const [searchTerm, setSearchTerm] = useState('')
   const [theme, setTheme] = useState(() => {
     const storedTheme = localStorage.getItem('theme')
     if (storedTheme === 'light' || storedTheme === 'dark') return storedTheme
     return window.matchMedia?.('(prefers-color-scheme: dark)')?.matches ? 'dark' : 'light'
   })
   const archiveTimerRef = useRef(null)
+
+  const toggleSidebar = () => {
+    setSidebarExpanded((prev) => !prev)
+  }
 
   useEffect(() => {
     localStorage.setItem('notes', JSON.stringify(notes))
@@ -142,21 +148,34 @@ function App() {
     setEditingNote((prev) => (prev ? { ...prev, ...updates } : prev))
   }
 
-  const visibleNotes = notes.filter((note) =>
-    view === 'archive' ? note.archived : !note.archived
-  )
+  const visibleNotes = notes.filter((note) => {
+    // Filter by archive/notes view
+    const viewMatch = view === 'archive' ? note.archived : !note.archived
+    
+    // Filter by search term (case-insensitive)
+    if (searchTerm.trim() === '') {
+      return viewMatch
+    }
+    
+    const searchLower = searchTerm.toLowerCase()
+    const titleMatch = note.title.toLowerCase().includes(searchLower)
+    const contentMatch = getPlainText(note.text).toLowerCase().includes(searchLower)
+    
+    return viewMatch && (titleMatch || contentMatch)
+  })
 
   return (
     <>
-      <Navbar />
+      <Navbar onToggleSidebar={toggleSidebar} searchTerm={searchTerm} onSearchChange={setSearchTerm} />
       <main>
-        <Sidebar activeView={view} onViewChange={setView} />
+        <Sidebar activeView={view} onViewChange={setView} isExpanded={sidebarExpanded} onToggleExpand={setSidebarExpanded} />
         {view === 'notes' && (
           <Form onAddNote={addNote} />
         )}
         <Notes
           notes={visibleNotes}
           view={view}
+          searchTerm={searchTerm}
           onNoteClick={openModal}
           onArchiveNote={archiveNote}
           onUpdateNote={updateNote}

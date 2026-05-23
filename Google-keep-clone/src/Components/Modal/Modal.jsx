@@ -1,6 +1,7 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { FormActions } from '../Form/Form.jsx'
 import RichTextEditor from '../shared/RichTextEditor.jsx'
+import { adjustHex } from '../shared/ColorPicker.jsx'
 import './Modal.css'
 
 export default function Modal({
@@ -13,6 +14,22 @@ export default function Modal({
   const modalFormRef = useRef(null)
   const closeButtonRef = useRef(null)
   const textEditorRef = useRef(null)
+  const [theme, setTheme] = useState('light')
+
+  // Listen to theme changes
+  useEffect(() => {
+    const initialTheme = document.documentElement.dataset.theme || 'light'
+    setTheme(initialTheme)
+
+    const observer = new MutationObserver(() => {
+      const newTheme = document.documentElement.dataset.theme || 'light'
+      setTheme(newTheme)
+    })
+
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
+
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
     function handleCloseModal(event) {
@@ -37,7 +54,10 @@ export default function Modal({
     return null
   }
 
-  const bgColor = editingNote.backgroundColor || '#ffffff'
+  // Apply dark mode adjustment to form colors
+  const darkFactor = -0.18
+  const baseColor = editingNote.backgroundColor || '#ffffff'
+  const displayColor = theme === 'dark' && baseColor !== '#ffffff' ? adjustHex(baseColor, darkFactor) : baseColor
 
   let reminderText = null
   if (editingNote.reminder?.date) {
@@ -48,7 +68,7 @@ export default function Modal({
   return (
     <div className="modal open-modal">
       <div className="modal-content">
-        <div className="form-container" style={{ backgroundColor: bgColor }}>
+        <div className="form-container" style={{ backgroundColor: displayColor }}>
           <form
             ref={modalFormRef}
             className="form"
