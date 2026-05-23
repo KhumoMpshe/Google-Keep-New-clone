@@ -88,7 +88,8 @@ textarea {
 [data-theme='dark'] .small-icon,
 [data-theme='dark'] .check-circle,
 [data-theme='dark'] .logo-text,
-[data-theme='dark'] h3
+[data-theme='dark'] h3,
+[data-theme='dark'] .note-text-editor,
 [data-theme='dark'] .collab-modal__list li,
 [data-theme='dark'] .collab-modal__list li .material-symbols-outlined,
 [data-theme='dark'] li{

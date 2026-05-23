@@ -1,5 +1,4 @@
-import './Navbar.css'
-import '../../assets/profile.png' 
+import './Navbar.css' 
 
 export default function Navbar({ onToggleSidebar, searchTerm = '', onSearchChange }) {
   return (

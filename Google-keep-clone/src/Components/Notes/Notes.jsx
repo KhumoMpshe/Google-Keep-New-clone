@@ -206,7 +206,7 @@ function NoteCard({ note, onNoteClick, onArchiveNote, onUpdateNote, onDeleteNote
 
 export default function Notes({ notes, view, onNoteClick, onArchiveNote, onUpdateNote, onDeleteNote, searchTerm = '' }) {
   if (notes.length === 0) {
-    let emptyMessage = 'Notes that you add apear here'
+    let emptyMessage = 'Notes that you add appear here'
     
     if (searchTerm.trim() !== '') {
       emptyMessage = 'No notes found'
