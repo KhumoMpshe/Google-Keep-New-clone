@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { KEEP_COLORS } from '../../utils/noteHelpers.js'
+import { KEEP_COLORS, getThemeBackgroundColor } from '../../utils/noteHelpers.js'
 import './ColorPicker.css'
 
 function clamp(v, a = 0, b = 255) {
@@ -44,7 +44,7 @@ export default function ColorPicker({ selectedColor, onSelect, onClose }) {
     return () => observer.disconnect()
   }, [])
 
-  const toDisplayColor = (base) => (theme === 'dark' ? adjustHex(base, darkFactor) : base)
+  const toDisplayColor = (base) => getThemeBackgroundColor(base, theme)
 
   return (
     <div className="color-picker" onClick={(e) => e.stopPropagation()}>

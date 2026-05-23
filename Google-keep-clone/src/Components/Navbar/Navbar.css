@@ -66,3 +66,13 @@ nav {
   display: flex;
   align-items: center;
 }
+
+.profile {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-image: url('../../assets/profile.png');
+  background-size: cover;
+  background-position: center;
+}

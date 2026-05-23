@@ -5,8 +5,7 @@ import ReminderPicker from '../shared/ReminderPicker.jsx'
 import MoreMenu from '../shared/MoreMenu.jsx'
 import CollaboratorModal from '../shared/CollaboratorModal.jsx'
 import RichTextEditor from '../shared/RichTextEditor.jsx'
-import { adjustHex } from '../shared/ColorPicker.jsx'
-import { getPlainText } from '../../utils/noteHelpers.js'
+import { getPlainText, getThemeBackgroundColor, getThemeBorderColor } from '../../utils/noteHelpers.js'
 import './Form.css'
 
 function FormPin() {
@@ -355,14 +354,17 @@ export default function Form({ onAddNote }) {
     saveAndClose()
   }
 
-  // Apply dark mode adjustment to form colors
-  const darkFactor = -0.18
-  const displayColor = theme === 'dark' && backgroundColor !== '#ffffff' ? adjustHex(backgroundColor, darkFactor) : backgroundColor
-  const displayBorder = theme === 'dark' && backgroundColor !== '#ffffff' ? adjustHex(backgroundColor, darkFactor) : (backgroundColor !== '#ffffff' ? backgroundColor : undefined)
+  const displayColor = getThemeBackgroundColor(backgroundColor, theme)
+  const displayBorder = getThemeBorderColor(backgroundColor, theme)
 
   const formContainerStyle = {
     backgroundColor: displayColor,
     borderColor: displayBorder,
+  }
+
+  const inactiveFormStyle = {
+    backgroundColor: theme === 'dark' ? 'var(--surface)' : '#ffffff',
+    borderColor: theme === 'dark' ? 'var(--border)' : '#e0e1e0',
   }
 
   return (
@@ -370,7 +372,7 @@ export default function Form({ onAddNote }) {
       <div
         ref={inactiveFormRef}
         className="form-container inactive-form"
-        style={{ display: isActive ? 'none' : 'block' }}
+        style={{ display: isActive ? 'none' : 'block', ...inactiveFormStyle }}
       >
         <form>
           <input

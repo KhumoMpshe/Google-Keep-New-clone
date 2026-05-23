@@ -3,8 +3,7 @@ import ColorPicker from '../shared/ColorPicker.jsx'
 import ReminderPicker from '../shared/ReminderPicker.jsx'
 import CollaboratorModal from '../shared/CollaboratorModal.jsx'
 import MoreMenu from '../shared/MoreMenu.jsx'
-import { formatReminderLabel } from '../../utils/noteHelpers.js'
-import { adjustHex } from '../shared/ColorPicker.jsx'
+import { formatReminderLabel, getThemeBackgroundColor, getThemeBorderColor } from '../../utils/noteHelpers.js'
 import './Notes.css'
 
 const footerIcons = [
@@ -66,10 +65,9 @@ function NoteCard({ note, onNoteClick, onArchiveNote, onUpdateNote, onDeleteNote
   }
 
   // Apply dark mode adjustment to note colors
-  const darkFactor = -0.18
   const baseColor = note.backgroundColor || '#ffffff'
-  const displayColor = theme === 'dark' && baseColor !== '#ffffff' ? adjustHex(baseColor, darkFactor) : baseColor
-  const displayBorder = theme === 'dark' && baseColor !== '#ffffff' ? adjustHex(baseColor, darkFactor) : (baseColor !== '#ffffff' ? baseColor : '#e0e1e0')
+  const displayColor = getThemeBackgroundColor(baseColor, theme)
+  const displayBorder = getThemeBorderColor(baseColor, theme)
 
   const noteStyle = {
     backgroundColor: displayColor,

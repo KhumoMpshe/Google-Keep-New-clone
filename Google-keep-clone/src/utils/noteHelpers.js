@@ -51,6 +51,38 @@ export function getPlainText(htmlOrText) {
   return (div.textContent || '').trim()
 }
 
+function clamp(v, a = 0, b = 255) {
+  return Math.max(a, Math.min(b, Math.round(v)))
+}
+
+export function adjustHex(hex, factor) {
+  if (!hex || typeof hex !== 'string') return hex
+  const h = hex.replace('#', '')
+  if (h.length !== 6) return hex
+  const bigint = parseInt(h, 16)
+  const r = (bigint >> 16) & 255
+  const g = (bigint >> 8) & 255
+  const b = bigint & 255
+  const nr = clamp(r * (1 + factor))
+  const ng = clamp(g * (1 + factor))
+  const nb = clamp(b * (1 + factor))
+  return `#${((1 << 24) + (nr << 16) + (ng << 8) + nb).toString(16).slice(1)}`
+}
+
+const DARK_THEME_ADJUSTMENT = -0.32
+
+export function getThemeBackgroundColor(baseColor, theme) {
+  if (theme !== 'dark') return baseColor
+  if (!baseColor || baseColor.toLowerCase() === '#ffffff') return 'var(--surface)'
+  return adjustHex(baseColor, DARK_THEME_ADJUSTMENT)
+}
+
+export function getThemeBorderColor(baseColor, theme) {
+  if (theme !== 'dark') return baseColor !== '#ffffff' ? baseColor : '#e0e1e0'
+  if (!baseColor || baseColor.toLowerCase() === '#ffffff') return 'var(--border)'
+  return adjustHex(baseColor, DARK_THEME_ADJUSTMENT)
+}
+
 export function formatReminderLabel(reminder) {
   if (!reminder?.date) return ''
   const date = new Date(`${reminder.date}T${reminder.time || '09:00'}`)

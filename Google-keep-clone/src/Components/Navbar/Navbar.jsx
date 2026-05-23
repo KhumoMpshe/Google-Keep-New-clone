@@ -1,4 +1,5 @@
 import './Navbar.css'
+import '../../assets/profile.png' 
 
 export default function Navbar({ onToggleSidebar, searchTerm = '', onSearchChange }) {
   return (
@@ -74,7 +75,7 @@ export default function Navbar({ onToggleSidebar, searchTerm = '', onSearchChang
           </div>
 
           <div className="tooltip">
-            <span className="material-symbols-outlined hover">account_circle</span>
+            <span className="material-symbols-outlined hover profile"></span>
             <span className="tooltip-text">Accounts</span>
           </div>
         </div>

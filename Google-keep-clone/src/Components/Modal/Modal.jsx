@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { FormActions } from '../Form/Form.jsx'
 import RichTextEditor from '../shared/RichTextEditor.jsx'
-import { adjustHex } from '../shared/ColorPicker.jsx'
+import { getThemeBackgroundColor } from '../../utils/noteHelpers.js'
 import './Modal.css'
 
 export default function Modal({
@@ -54,10 +54,8 @@ export default function Modal({
     return null
   }
 
-  // Apply dark mode adjustment to form colors
-  const darkFactor = -0.18
   const baseColor = editingNote.backgroundColor || '#ffffff'
-  const displayColor = theme === 'dark' && baseColor !== '#ffffff' ? adjustHex(baseColor, darkFactor) : baseColor
+  const displayColor = getThemeBackgroundColor(baseColor, theme)
 
   let reminderText = null
   if (editingNote.reminder?.date) {

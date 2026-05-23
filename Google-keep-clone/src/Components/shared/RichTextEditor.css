@@ -1,9 +1,8 @@
 .note-text-editor {
   border: none;
   font-size: 1rem;
-  flex: 1;
-  min-height: 0;
-  padding: 4px 10px;
+  min-height: 100px;
+  padding: 8px 10px;
   margin-left: 10px;
   width: calc(100% - 20px);
   outline: none;
