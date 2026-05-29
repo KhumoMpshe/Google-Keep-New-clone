@@ -8,10 +8,10 @@
   color: #5f6368;
   width: 80px;
   overflow-x: hidden;
-  transition: width 0.3s ease;
+  transition: width 0s ease;
   height: 100%;
   background: white;
-  z-index: 1100;
+  z-index: 1000;
 }
 
 .sidebar-hover {
@@ -67,3 +67,5 @@
 .sidebar-active-item:hover {
   background-color: #fef0c3;
 }
+
+

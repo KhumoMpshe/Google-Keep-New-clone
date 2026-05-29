@@ -1,6 +1,26 @@
-import './Navbar.css' 
+import { useEffect, useState } from 'react'
+import './Navbar.css'
+import profileImage from '../../assets/profile.png'
 
 export default function Navbar({ onToggleSidebar, searchTerm = '', onSearchChange }) {
+  const [showMobileSearch, setShowMobileSearch] = useState(false)
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' ? window.matchMedia('(max-width: 479px)').matches : false
+  )
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    const mediaQuery = window.matchMedia('(max-width: 479px)')
+
+    const handleChange = () => setIsMobile(mediaQuery.matches)
+
+    handleChange()
+    mediaQuery.addEventListener?.('change', handleChange)
+
+    return () => mediaQuery.removeEventListener?.('change', handleChange)
+  }, [])
+
   return (
     <nav>
       <div className="logo-area">
@@ -36,18 +56,37 @@ export default function Navbar({ onToggleSidebar, searchTerm = '', onSearchChang
         <span className="logo-text">Keep</span>
       </div>
 
-      <div className="search-area">
-        <div className="tooltip-one">
-          <span className="material-symbols-outlined hover">search</span>
-          <span className="tooltip-text">Search</span>
+
+
+      {/* Search Icon (always visible) */}
+      <button
+        type="button"
+        className="mobile-search-toggle"
+        aria-label={showMobileSearch ? 'Close search' : 'Open search'}
+        onClick={() => setShowMobileSearch((prev) => !prev)}
+        style={{ marginLeft: 12, marginRight: 12 }}
+      >
+        <span className="material-symbols-outlined hover">
+          {showMobileSearch ? 'close' : 'search'}
+        </span>
+      </button>
+
+      {/* Search input only appears when toggled (mobile) or always on desktop */}
+      {((!isMobile && !showMobileSearch) || (isMobile && showMobileSearch)) && (
+        <div className={`search-area${showMobileSearch ? ' search-area--mobile-open' : ''}`}>
+          <span className="material-symbols-outlined search-area__icon" aria-hidden="true">
+            search
+          </span>
+          <input
+            type="text"
+            placeholder="Search"
+            value={searchTerm}
+            autoFocus={showMobileSearch}
+            onChange={(e) => onSearchChange?.(e.target.value)}
+            aria-label="Search notes"
+          />
         </div>
-        <input 
-          type="text" 
-          placeholder="Search" 
-          value={searchTerm}
-          onChange={(e) => onSearchChange?.(e.target.value)}
-        />
-      </div>
+      )}
 
       <div className="navbar-actions">
         <div className="settings-area">
@@ -74,7 +113,11 @@ export default function Navbar({ onToggleSidebar, searchTerm = '', onSearchChang
           </div>
 
           <div className="tooltip">
-            <span className="material-symbols-outlined hover profile"></span>
+            <img
+              src={profileImage}
+              alt="Profile"
+              className="profile-avatar hover"
+            />
             <span className="tooltip-text">Accounts</span>
           </div>
         </div>

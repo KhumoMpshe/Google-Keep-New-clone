@@ -1,0 +1,487 @@
+.mobile-search-toggle {
+  display: none;
+}
+
+@media (max-width: 319px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4px;
+    height: 64px;
+    padding: 8px 6px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+    min-width: 0;
+  }
+
+  .logo-text {
+    font-size: 16px;
+    white-space: nowrap;
+  }
+
+  .logo-area img {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .mobile-search-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-left: 0 !important;
+    margin-right: 2px !important;
+  }
+
+  nav .navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .settings-area,
+  .profile-actions-area {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-shrink: 0;
+  }
+
+  .tooltip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  nav .material-symbols-outlined {
+    padding: 2px;
+    font-size: 18px;
+  }
+
+  nav .profile-avatar {
+    width: 22px;
+    height: 22px;
+  }
+
+  .search-area {
+    display: none;
+    width: 100%;
+    min-width: 0;
+    height: 44px;
+    margin-left: 0;
+    align-items: center;
+    background: var(--surface, #f1f3f4);
+    border-radius: 8px;
+    padding: 0 8px;
+    box-sizing: border-box;
+  }
+
+  .search-area--mobile-open {
+    display: flex;
+    position: absolute;
+    left: 0;
+    top: 56px;
+    width: 100vw;
+    z-index: 1001;
+    background: var(--surface, #f1f3f4);
+    border-radius: 0;
+    box-shadow: 0 2px 8px rgba(60, 64, 67, 0.1);
+  }
+
+  main {
+    padding-top: 80px;
+    padding-left: 0;
+    padding-right: 0;
+    width: 100vw;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-container {
+    width: 100%;
+    max-width: 420px;
+    margin: 16px 0 0 0;
+    box-sizing: border-box;
+  }
+
+  .notes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 0;
+    width: 100vw;
+    max-width: 480px;
+    box-sizing: border-box;
+  }
+
+  .note {
+    width: 100%;
+    max-width: 420px;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  .note-footer,
+  .note:hover .check-circle,
+  .note:hover .pin-note {
+    visibility: visible;
+  }
+
+  .theme-toggle-btn {
+    right: 14px;
+    bottom: 14px;
+  }
+
+  /* On very small screens: keep icons, hide labels unless expanded */
+  .sidebar:not(.sidebar-hover) .sidebar-text {
+    display: none;
+  }
+
+  /* Collapsed: icons only. Expanded: full width with labels */
+  .sidebar:not(.sidebar-hover) {
+    width: 80px !important;
+  }
+
+  .sidebar.sidebar-hover {
+    width: 250px !important;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 479px) {
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4px;
+    height: 64px;
+    padding: 8px 8px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+    min-width: 0;
+  }
+
+  .logo-text {
+    font-size: 17px;
+    white-space: nowrap;
+  }
+
+  .logo-area img {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .mobile-search-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-left: 0 !important;
+    margin-right: 2px !important;
+  }
+
+  nav .navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .settings-area,
+  .profile-actions-area {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-shrink: 0;
+  }
+
+  .tooltip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  nav .material-symbols-outlined {
+    padding: 2px;
+    font-size: 18px;
+  }
+
+  nav .profile-avatar {
+    width: 22px;
+    height: 22px;
+  }
+
+  .search-area {
+    display: none;
+    width: 100%;
+    min-width: 0;
+    height: 44px;
+    margin-left: 0;
+    align-items: center;
+    background: var(--surface, #f1f3f4);
+    border-radius: 8px;
+    padding: 0 8px;
+    box-sizing: border-box;
+  }
+
+  .search-area--mobile-open {
+    display: flex;
+    position: absolute;
+    left: 0;
+    top: 56px;
+    width: 100vw;
+    z-index: 1001;
+    background: var(--surface, #f1f3f4);
+    border-radius: 0;
+    box-shadow: 0 2px 8px rgba(60, 64, 67, 0.1);
+  }
+
+  main {
+    padding-top: 80px;
+    padding-left: 0;
+    padding-right: 0;
+    width: 409px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-container {
+    max-width: 220px;
+    margin: 16px 0 0 0;
+    box-sizing: border-box;
+  }
+
+  .notes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 0;
+    width: 100vw;
+    max-width: 480px;
+    box-sizing: border-box;
+  }
+
+  .note {
+    width: 100%;
+    max-width: 420px;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  .note-footer,
+  .note:hover .check-circle,
+  .note:hover .pin-note {
+    visibility: visible;
+  }
+
+  .sidebar {
+    overflow: hidden; /* hides anything that doesn’t fit */ 
+  }
+
+  /* Mobile: keep icons visible; only show text when expanded (hover/menu open) */
+  .sidebar:not(.sidebar-hover) .sidebar-text {
+    display: none;
+  }
+
+  /* Collapsed: icons only. Expanded: full width with labels */
+  .sidebar:not(.sidebar-hover) {
+    width: 80px !important;
+  }
+
+  .sidebar.sidebar-hover {
+    width: 250px !important;
+  }
+
+  .sidebar span {
+    white-space: nowrap;
+    text-overflow: clip;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+  nav {
+    display: grid;
+    grid-template-columns: auto auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px;
+    height: auto;
+    padding: 10px 14px;
+  }
+
+  .mobile-search-toggle {
+    display: none;
+  }
+
+  .search-area {
+    grid-column: 1 / span 4;
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+  }
+
+  .navbar-actions {
+    grid-column: 4;
+    justify-self: end;
+    margin-left: 0;
+  }
+
+  main {
+    padding-top: 96px;
+    padding-left: 88px;
+    padding-right: 14px;
+  }
+
+  .form-container {
+    width: min(100%, 560px);
+    margin: 24px auto;
+  }
+
+  .notes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+    padding: 0 14px;
+    justify-content: stretch;
+  }
+
+  .note {
+    width: 100%;
+    margin: 0;
+  }
+
+  .note-footer,
+  .note:hover .check-circle,
+  .note:hover .pin-note {
+    visibility: visible;
+  }
+}
+
+@media (min-width: 768px) {
+  .mobile-search-toggle {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  nav {
+    padding: 8px 18px;
+  }
+
+  .search-area {
+    margin-left: 16px;
+    max-width: 420px;
+  }
+
+  main {
+    padding-left: 88px;
+    padding-right: 18px;
+  }
+
+  .form-container {
+    width: min(100%, 640px);
+    margin: 28px auto;
+  }
+
+  .notes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    padding: 0 18px;
+    justify-content: stretch;
+  }
+
+  .note {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  main {
+    padding-left: 88px;
+    padding-right: 20px;
+  }
+
+  .form-container {
+    width: min(100%, 680px);
+  }
+
+  .notes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    padding: 0 20px;
+    justify-content: stretch;
+  }
+
+  .note {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+@media (min-width: 1280px) {
+  main {
+    padding-left: 96px;
+    padding-right: 24px;
+  }
+
+  .form-container {
+    width: min(100%, 680px);
+  }
+
+  .notes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+    padding: 0 24px;
+    justify-content: stretch;
+  }
+
+  .note {
+    width: 100%;
+    margin: 0;
+  }
+}

@@ -9,7 +9,7 @@ const sidebarItems = [
   { id: 'trash', icon: 'delete', label: 'Trash', view: 'notes' },
 ]
 
-export default function Sidebar({ activeView = 'notes', onViewChange, isExpanded = false, onToggleExpand }) {
+export default function Sidebar({ activeView = 'notes', onViewChange, isExpanded = true, onToggleExpand }) {
   const handleItemClick = (item) => {
     if (item.view && onViewChange) {
       onViewChange(item.view)
@@ -23,6 +23,7 @@ export default function Sidebar({ activeView = 'notes', onViewChange, isExpanded
       onMouseEnter={() => onToggleExpand?.(true)}
       onMouseLeave={() => onToggleExpand?.(false)}
     >
+
       {sidebarItems.map((item) => {
         const isActive =
           item.id === 'archive'

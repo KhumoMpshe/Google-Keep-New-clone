@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import './App.css'
+import './Responsiveness.css'
 import Navbar from './Components/Navbar/Navbar.jsx'
 import Sidebar from './Components/Sidebar/Sidebar.jsx'
 import Form from './Components/Form/Form.jsx'

@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from 'react'
 import ColorPicker from '../shared/ColorPicker.jsx'
 import ReminderPicker from '../shared/ReminderPicker.jsx'
 import CollaboratorModal from '../shared/CollaboratorModal.jsx'
-import MoreMenu from '../shared/MoreMenu.jsx'
+import MoreMenu from '../shared/MoreMenu.jsx' 
 import { formatReminderLabel, getThemeBackgroundColor, getThemeBorderColor } from '../../utils/noteHelpers.js'
 import './Notes.css'
 
